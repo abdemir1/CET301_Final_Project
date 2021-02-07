@@ -1,7 +1,16 @@
 import 'dart:ui';
-
+import 'package:final_project/Screens/HomePage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+
+
+void gotoHomePage(BuildContext context) {
+  Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => HomePage()
+  ));
+}
+
 
 class LoginPage extends StatefulWidget {
   @override
@@ -12,24 +21,26 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
 
       body: Container(
         width: double.infinity,
 
         decoration: BoxDecoration(
+            gradient: LinearGradient(
+                colors: [
+                  Colors.amberAccent,
+                  Colors.deepPurpleAccent,
+                ]
+            )
 
-          gradient: LinearGradient(
-            colors: [
-              Colors.amberAccent,
-              Colors.deepPurpleAccent,
-            ]
-         )
         ),
           child: Container(
           margin: EdgeInsets.all(30.0),
 
           child: Column(
             children: [
+
 
               SizedBox(height: 80,
               ),
@@ -50,12 +61,26 @@ class _LoginPageState extends State<LoginPage> {
                           SizedBox(height: 20,),
                           Center(
 
-                            child: Text("Hello!", style: TextStyle(color: Colors.white, fontSize: 30),),
+                            child: Text("Hello!", style: TextStyle(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold),),
                           ),
                           Center(
-                            child: Text("Welcome to Travella", style: TextStyle(color: Colors.white, fontSize: 18),),
+                            child: Text("Welcome to Travella", style: TextStyle(color: Colors.white, fontSize: 20, fontStyle: FontStyle.italic ),),
                           ),
-                          SizedBox(height: 40,),
+                          Padding(
+                            padding: const EdgeInsets.only(right:10.0, left: 10.0, top: 10.0),
+                            child: Center(
+                              child: Text("Login if you have an account.",
+                                style: TextStyle(color: Colors.black54, fontSize: 14, fontStyle: FontStyle.italic ),),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left:10.0, right: 10.0),
+                            child: Center(
+                              child: Text("If not, join us from down below!.",
+                                style: TextStyle(color: Colors.black54, fontSize: 14, fontStyle: FontStyle.italic ),),
+                            ),
+                          ),
+
                           Container(
 
                             padding: EdgeInsets.all(10),
@@ -93,19 +118,53 @@ class _LoginPageState extends State<LoginPage> {
                           Center(
                             child: Text(
                               "Forgot Password?",
-                              style: TextStyle(color: Colors.white70),
+                              style: TextStyle(color: Colors.black54),
 
                             ),
                           ),
-                          SizedBox(height: 40,),
+                          SizedBox(height: 20,),
+
+                          SizedBox(
+                            width: double.infinity,
+                            height: 40,
+                            child: RaisedButton( onPressed: (){gotoHomePage(context);},
+                              child: Text('Login'),
+                              color: Colors.deepPurpleAccent,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(18.0),
+                                  side: BorderSide(color: Colors.deepPurpleAccent)
+                              ),
+
+                            ),
+                          ),
+                          SizedBox(height: 20,),
+
+                          SizedBox(
+                            width: double.infinity,
+                            height: 40,
+                            child: RaisedButton( onPressed: (){gotoHomePage(context);},
+                              child: Text('Sign Up',
+                              style: TextStyle(color: Colors.black54) ),
+                              color: Colors.amber[200],
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(18.0),
+                                  side: BorderSide(color: Colors.amber[200])
+                              ),
+
+                            ),
+                          ),
+
 
 
                         ],
+
                       ),
 
 
 
+
                 ),
+
               )
               )
             ],
