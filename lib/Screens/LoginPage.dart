@@ -15,19 +15,22 @@ class _LoginPageState extends State<LoginPage> {
 
       body: Container(
         width: double.infinity,
+
         decoration: BoxDecoration(
+
           gradient: LinearGradient(
             colors: [
               Colors.amberAccent,
               Colors.deepPurpleAccent,
             ]
-          )
+         )
         ),
-        child: Container(
-          margin: EdgeInsets.all(50.0),
+          child: Container(
+          margin: EdgeInsets.all(30.0),
 
           child: Column(
             children: [
+
               SizedBox(height: 80,
               ),
               Expanded (
