@@ -66,20 +66,6 @@ class _LoginPageState extends State<LoginPage> {
                           Center(
                             child: Text("Welcome to Travella", style: TextStyle(color: Colors.white, fontSize: 20, fontStyle: FontStyle.italic ),),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(right:10.0, left: 10.0, top: 10.0),
-                            child: Center(
-                              child: Text("Login if you have an account.",
-                                style: TextStyle(color: Colors.black54, fontSize: 14, fontStyle: FontStyle.italic ),),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left:10.0, right: 10.0),
-                            child: Center(
-                              child: Text("If not, join us from down below!.",
-                                style: TextStyle(color: Colors.black54, fontSize: 14, fontStyle: FontStyle.italic ),),
-                            ),
-                          ),
 
                           Container(
 
@@ -139,6 +125,14 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           SizedBox(height: 20,),
 
+                          Padding(
+                            padding: const EdgeInsets.only(left:10.0, right: 10.0),
+                            child: Center(
+                              child: Text("If you are new, join us!",
+                                style: TextStyle(color: Colors.black54, fontSize: 14, fontStyle: FontStyle.italic ),),
+                            ),
+                          ),
+                          SizedBox(height: 10,),
                           SizedBox(
                             width: double.infinity,
                             height: 40,
