@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:final_project/Screens/HomePage.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:final_project/Screens/SignUpPage.dart';
 import 'package:flutter/material.dart';
 
 
@@ -8,6 +8,12 @@ import 'package:flutter/material.dart';
 void gotoHomePage(BuildContext context) {
   Navigator.of(context).push(MaterialPageRoute(
       builder: (context) => HomePage()
+  ));
+}
+
+void gotoSignUpPage(BuildContext context) {
+  Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => SignUpPage()
   ));
 }
 
@@ -41,7 +47,6 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             children: [
 
-
               SizedBox(height: 80,
               ),
               Expanded (
@@ -51,8 +56,8 @@ class _LoginPageState extends State<LoginPage> {
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(60),
                           topRight: Radius.circular(60),
-                  )
-                ),
+                    )
+                  ),
 
                     child: Container(
                       child: Column(
@@ -89,17 +94,17 @@ class _LoginPageState extends State<LoginPage> {
                             decoration: BoxDecoration(
                                 border: Border(
                               bottom: BorderSide(color: Colors.grey[200])
-                          )
-                      ),
+                                )
+                            ),
 
                             child: TextField(
                               decoration: InputDecoration(
                             hintText: "Enter your password",
                             hintStyle: TextStyle(color: Colors.deepPurpleAccent),
                             border: InputBorder.none
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
                           SizedBox(height: 40,),
                           Center(
                             child: Text(
@@ -121,6 +126,7 @@ class _LoginPageState extends State<LoginPage> {
                                   side: BorderSide(color: Colors.deepPurpleAccent)
                               ),
 
+
                             ),
                           ),
                           SizedBox(height: 20,),
@@ -133,10 +139,11 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
                           SizedBox(height: 10,),
+
                           SizedBox(
                             width: double.infinity,
                             height: 40,
-                            child: RaisedButton( onPressed: (){gotoHomePage(context);},
+                            child: RaisedButton( onPressed: (){gotoSignUpPage(context);},
                               child: Text('Sign Up',
                               style: TextStyle(color: Colors.black54) ),
                               color: Colors.amber[200],
