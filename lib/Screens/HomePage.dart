@@ -1,4 +1,5 @@
 
+import 'package:final_project/Screens/CreateEntry.dart';
 import 'package:flutter/material.dart';
 
 
@@ -13,35 +14,34 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
 
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text ('Travella', style: TextStyle(fontSize: 22, color: Colors.deepPurple[200])),
-            Icon (Icons.add_circle_sharp),
-
-          ],
-
+        title: Padding(
+          padding: const EdgeInsets.all(70.0),
+          child: Text ('Travella', style: TextStyle(fontSize: 20, color: Colors.deepPurple[200])),
         ),
+
         backgroundColor: Colors.transparent,
         elevation: 0.0,
 
       ),
 
-      body: SafeArea(
+      body: Container(),
 
-        child: ListView(
-          padding: EdgeInsets.symmetric(vertical: 10.0),
+      floatingActionButton: Container(
+
+        padding: EdgeInsets.symmetric(vertical: 30.0),
+        child: Row(
+
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Padding(padding: EdgeInsets.only(right: 100, left: 20),
-              child: Text(
-              'Find a place in Travella!',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            ),
-            SizedBox(height: 20),
 
-        ]
-        )
+            FloatingActionButton(onPressed: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => CreateEntry()));
+            },
+              child: Icon (Icons.add),
+            backgroundColor: Colors.amber[200],)
+          ],
+        ),
+
       ),
     );
   }

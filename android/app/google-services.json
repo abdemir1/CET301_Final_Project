@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1087701183501",
+    "project_id": "travellacet301",
+    "storage_bucket": "travellacet301.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1087701183501:android:b95367ddd0f4f1d472b944",
+        "android_client_info": {
+          "package_name": "com.example.final_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1087701183501-g3huah50p76aoer3rvn0bc339c6rrvl0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAntylaEKmBsNpKo3rTthFW0YljeiT0E4s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1087701183501-g3huah50p76aoer3rvn0bc339c6rrvl0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

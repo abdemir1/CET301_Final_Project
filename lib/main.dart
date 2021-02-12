@@ -1,5 +1,8 @@
 
+import 'package:google_fonts/google_fonts.dart';
+
 import 'Screens/LoginPage.dart';
+import 'Screens/LandingPage.dart'; // might delete
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,11 +14,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-
+      debugShowCheckedModeBanner: false,
       title: 'Login',
-      theme: ThemeData.dark(),
+      theme: ThemeData(
+        textTheme: GoogleFonts.montserratTextTheme(
+          Theme.of(context).textTheme,
+        )
+      ),
 
-      home: LoginPage(),
+      home: LandingPage(), // might become login
     );
   }
 }
