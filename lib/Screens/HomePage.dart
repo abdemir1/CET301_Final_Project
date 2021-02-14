@@ -1,7 +1,10 @@
 
 import 'package:final_project/Screens/CreateEntry.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-
+import 'package:google_fonts/google_fonts.dart';
+import 'package:final_project/Services/blogs.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -9,6 +12,44 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+//deneme
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  List<Blogs> blogsData = [];
+
+  Future _getBlogData() async {
+    DatabaseReference reference = await FirebaseDatabase.instance.reference();
+    reference.child("Blogs").once().then((DataSnapshot snapshot){
+      var keys = snapshot.value.keys;
+      var data = snapshot.value;
+
+      blogsData.clear();
+
+      for (var singleKey in keys) {
+        Blogs blogModel = Blogs(
+          image: data[singleKey]["image"],
+          title: data[singleKey]["title"],
+          desc: data[singleKey]["desc"],
+        );
+        setState(() {
+          blogsData.add(blogModel);
+          blogsData.reversed;
+        });
+        reference.keepSynced(true);
+      }
+    });
+  }
+
+  @override
+
+ // void initState() {
+   // super.initState();
+  //  _getBlogData();
+ // }
+
+//deneme
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +65,19 @@ class _HomePageState extends State<HomePage> {
 
       ),
 
-      body: Container(),
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: ListView(
+          physics: BouncingScrollPhysics(),
+          children: [
+            SingleItem(),
+            SingleItem(),
+            SingleItem(),
+            SingleItem(),
+          ],
+        )
+      ),
 
       floatingActionButton: Container(
 
@@ -42,6 +95,55 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
 
+      ),
+    );
+  }
+}
+
+class SingleItem extends StatelessWidget {
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white12,
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+
+      margin: EdgeInsets.all(10.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Stack(
+            alignment: Alignment.bottomCenter,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10.0),
+                child: Image(
+                  width: MediaQuery.of(context).size.width,
+                  height: 200.0,
+                  image: NetworkImage('https://static.toiimg.com/photo/69577255/alaska.jpg?width=748&resize=4'),
+                  fit: BoxFit.cover,
+                  filterQuality: FilterQuality.high,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 15.0),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 10.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text ('title', style: GoogleFonts.montserrat(color: Colors.amber, fontSize: 22),),
+                SizedBox(height: 10.0),
+                Text ('desc', style: GoogleFonts.montserrat(color: Colors.amber, fontSize: 16),),
+              ],
+            ),
+          ),
+
+        ],
       ),
     );
   }

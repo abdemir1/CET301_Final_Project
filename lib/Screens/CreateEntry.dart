@@ -3,7 +3,8 @@ import 'dart:core';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:final_project/Services/crud.dart';
-
+import 'package:firebase_database/firebase_database.dart';
+import 'package:final_project/Screens/HomePage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:random_string/random_string.dart';
 
@@ -14,62 +15,52 @@ class CreateEntry extends StatefulWidget {
 
 class _CreateEntryState extends State<CreateEntry> {
 
-  String title, desc;
+  TextEditingController _titleController = TextEditingController();
+  TextEditingController _descController = TextEditingController();
+
+
   final picker = ImagePicker();
-  File selectedImage;
+  File _selectedImage;
 
   bool _isLoading = false;
-  CrudMethods crudMethods = new CrudMethods();
+  String _blogId = '';
+
 
   Future getImage() async {
 
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
 
     setState(() {
-      if (pickedFile != null) {
-        selectedImage = File(pickedFile.path);
-      } else {
-        print('No image selected.');
-      }
+
+        _selectedImage = File(pickedFile.path);
+
     });
   }
 
-  Future<void> uploadBlog() async{
-
-    if (selectedImage != null){
-
+  Future _uploadPost(File selectedImage, String title, String description) async {
+    setState(() {
+      _isLoading = true;
+    });
+    DatabaseReference reference = await FirebaseDatabase.instance.reference();
+    Reference ref = await FirebaseStorage.instance.ref().child("Blog_images").child(selectedImage.uri.toString() + ".jpg");
+    UploadTask uploadTask = ref.putFile(selectedImage);
+    String downloadUrl = await (await uploadTask).ref.getDownloadURL();
+    _blogId = reference.child("Blogs").push().key;
+    Map data = {
+      'image': downloadUrl,
+      'title': title,
+      'desc': description
+    };
+    reference.child("Blogs").child(_blogId).set(data).whenComplete(() {
       setState(() {
-        _isLoading = true;
+        _isLoading = false;
       });
-      Reference storage = FirebaseStorage.instance.ref().child("blogImages").child("${randomAlphaNumeric(9)}.jpg");
+      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => HomePage()), (route) => false);
+    });
 
-      final UploadTask task = storage.putFile(selectedImage);
-
-      var imageUrl;
-      await task.whenComplete(() async {
-        try {
-          imageUrl = await storage.getDownloadURL();
-        } catch (onError) {
-          print("Error");
-        }
-
-        print(imageUrl);
-      });
-
-      Map<String, String> blogData = {
-        "imgUrl": imageUrl,
-        "title": title,
-        "desc": desc
-      };
-
-      crudMethods.addData(blogData).then((value) {
-        setState(() {
-          _isLoading = false;
-        });
-        Navigator.pop(context);
-      });
-    } else{}
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -96,10 +87,10 @@ class _CreateEntryState extends State<CreateEntry> {
               onTap: () {
                 getImage();
               },
-              child: selectedImage != null ? Container(
+              child: _selectedImage != null ? Container(
                 height: 160,
                 width: MediaQuery.of(context).size.width,
-                child: ClipRRect(child: Image.file(selectedImage, fit: BoxFit.cover,), borderRadius: BorderRadius.circular(10)),)
+                child: ClipRRect(child: Image.file(_selectedImage, fit: BoxFit.cover,), borderRadius: BorderRadius.circular(10)),)
                   : Container(
                 height: 160,
                 decoration: BoxDecoration(
@@ -114,16 +105,14 @@ class _CreateEntryState extends State<CreateEntry> {
               child: Column(
                 children: <Widget>[
                   TextField(
+                    controller: _titleController,
                     decoration: InputDecoration(hintText: "Title"),
-                    onChanged: (val){
-                      title = val;
-                    },
+
                   ),
                   TextField(
+                    controller: _descController,
                     decoration: InputDecoration(hintText: "Description"),
-                    onChanged: (val){
-                      desc = val;
-                    },
+
                   ),
                 ],
               ),
@@ -134,7 +123,7 @@ class _CreateEntryState extends State<CreateEntry> {
                 width: double.infinity,
                 height: 40,
                 child: RaisedButton( onPressed: (){
-                  uploadBlog();
+                  _uploadPost(_selectedImage, _titleController.text, _descController.text);
                 },
                   child: Text('Upload'),
                   color: Colors.deepPurpleAccent,
