@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:final_project/Screens/HomePage.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 
 void gotoHomePage(BuildContext context) {
@@ -15,6 +16,11 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+
+  String _email = "";
+  String _password = "";
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,6 +84,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                     hintStyle: TextStyle(color: Colors.deepPurpleAccent),
                                     border: InputBorder.none
                                 ),
+
                               ),
                             ),
 
@@ -95,6 +102,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                     hintStyle: TextStyle(color: Colors.deepPurpleAccent),
                                     border: InputBorder.none
                                 ),
+
                               ),
 
                             ),
@@ -123,7 +131,10 @@ class _SignUpPageState extends State<SignUpPage> {
                             SizedBox(
                               width: double.infinity,
                               height: 40,
-                              child: RaisedButton( onPressed: (){gotoHomePage(context);},
+                              child: RaisedButton(
+                                onPressed: (){gotoHomePage(context);
+                                },
+
                                 child: Text('Sign Up',
                                     style: TextStyle(color: Colors.black54) ),
                                 color: Colors.amber[200],

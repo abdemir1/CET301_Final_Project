@@ -19,13 +19,12 @@ class LandingPage extends StatelessWidget {
           );
         }
 
-        // Connection Initialized - Firebase App is running
+        // Firebase App is running
         if (snapshot.connectionState == ConnectionState.done) {
           return LoginPage();
-
         }
 
-        // Connecting to Firebase - Loading
+        // Loading
         return Scaffold(
           body: Center(
             child: Text(
