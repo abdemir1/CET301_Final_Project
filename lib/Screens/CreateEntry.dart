@@ -6,7 +6,7 @@ import 'package:final_project/Services/crud.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:final_project/Screens/HomePage.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:random_string/random_string.dart';
+
 
 class CreateEntry extends StatefulWidget {
   @override
@@ -65,6 +65,7 @@ class _CreateEntryState extends State<CreateEntry> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       appBar: AppBar(
         title: Padding(
           padding: const EdgeInsets.all(70.0),
@@ -75,10 +76,11 @@ class _CreateEntryState extends State<CreateEntry> {
         elevation: 0.0,
 
       ),
+
+
       body: _isLoading ? Container(
         alignment: Alignment.center,
         child: CircularProgressIndicator(),
-
       ) : Container(
         child: Column(
           children: <Widget>[

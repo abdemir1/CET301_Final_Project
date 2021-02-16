@@ -1,10 +1,14 @@
 
 import 'package:final_project/Screens/CreateEntry.dart';
+import 'package:final_project/Screens/ProfilePage.dart';
+import 'package:final_project/Screens/ProfilePage2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:final_project/Services/blogs.dart';
+
+
 
 class HomePage extends StatefulWidget {
   @override
@@ -40,15 +44,8 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  @override
-
- // void initState() {
-   // super.initState();
-  //  _getBlogData();
- // }
-
 //deneme
-
+  int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -57,36 +54,60 @@ class _HomePageState extends State<HomePage> {
 
         title: Padding(
           padding: const EdgeInsets.all(70.0),
-          child: Text ('Travella', style: TextStyle(fontSize: 20, color: Colors.deepPurple[200])),
+          child: Text ('Travella', style: TextStyle(fontSize: 20, color: Colors.deepPurple[400])),
         ),
-
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-
+        backgroundColor: Colors.amber[200]
       ),
 
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         child: ListView(
+
           physics: BouncingScrollPhysics(),
-          children: [
-            SingleItem(),
-            SingleItem(),
-            SingleItem(),
-            SingleItem(),
-          ],
-        )
+           children: [
+          SingleItem(),
+          SingleItem(),
+          SingleItem(),
+          SingleItem(),
+      ],
+    ),
       ),
 
-      floatingActionButton: Container(
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+          backgroundColor: Colors.amber[100],
+          selectedItemColor: Colors.deepPurple,
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.insert_emoticon),
+              label: 'profile',
+            )
+          ],
+      onTap: (index){
+            setState(() {
+              _currentIndex = index;
 
+              if(_currentIndex==1){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ProfilePage()));
+              }
+              else
+                Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+            }
+            );
+      },
+      ),
+
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: Container(
         padding: EdgeInsets.symmetric(vertical: 30.0),
         child: Row(
-
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-
             FloatingActionButton(onPressed: (){
               Navigator.push(context, MaterialPageRoute(builder: (context) => CreateEntry()));
             },
@@ -94,7 +115,6 @@ class _HomePageState extends State<HomePage> {
             backgroundColor: Colors.amber[200],)
           ],
         ),
-
       ),
     );
   }
@@ -105,6 +125,7 @@ class SingleItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
       decoration: BoxDecoration(
         color: Colors.white12,

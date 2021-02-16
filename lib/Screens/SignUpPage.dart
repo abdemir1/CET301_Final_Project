@@ -97,6 +97,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               ),
 
                               child: TextField(
+                                obscureText: true,
                                 decoration: InputDecoration(
                                     hintText: "Enter your password",
                                     hintStyle: TextStyle(color: Colors.deepPurpleAccent),
@@ -116,6 +117,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               ),
 
                               child: TextField(
+                                obscureText: true,
                                 decoration: InputDecoration(
                                     hintText: "Confirm your password",
                                     hintStyle: TextStyle(color: Colors.deepPurpleAccent),

@@ -103,6 +103,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
 
                             child: TextField(
+                              obscureText: true,
                               decoration: InputDecoration(
                             hintText: "Enter your password",
                             hintStyle: TextStyle(color: Colors.deepPurpleAccent),
@@ -111,14 +112,6 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                           SizedBox(height: 40,),
-                          Center(
-                            child: Text(
-                              "Forgot Password?",
-                              style: TextStyle(color: Colors.black54),
-
-                            ),
-                          ),
-                          SizedBox(height: 20,),
 
                           SizedBox(
                             width: double.infinity,

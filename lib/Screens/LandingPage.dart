@@ -10,7 +10,7 @@ class LandingPage extends StatelessWidget {
     return FutureBuilder(
       future: _initialization,
       builder: (context, snapshot) {
-        // If Firebase App init, snapshot has error
+
         if (snapshot.hasError) {
           return Scaffold(
             body: Center(
@@ -19,12 +19,10 @@ class LandingPage extends StatelessWidget {
           );
         }
 
-        // Firebase App is running
         if (snapshot.connectionState == ConnectionState.done) {
           return LoginPage();
         }
 
-        // Loading
         return Scaffold(
           body: Center(
             child: Text(
