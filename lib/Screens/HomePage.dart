@@ -1,4 +1,5 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:final_project/Screens/CreateEntry.dart';
 import 'package:final_project/Screens/ProfilePage.dart';
 import 'package:final_project/Screens/ProfilePage2.dart';
@@ -67,9 +68,9 @@ class _HomePageState extends State<HomePage> {
           physics: BouncingScrollPhysics(),
            children: [
           SingleItem(),
-          SingleItem(),
-          SingleItem(),
-          SingleItem(),
+             SingleItem(),
+             SingleItem(),
+             SingleItem(),
       ],
     ),
       ),
@@ -121,7 +122,6 @@ class _HomePageState extends State<HomePage> {
 }
 
 class SingleItem extends StatelessWidget {
-
 
   @override
   Widget build(BuildContext context) {
